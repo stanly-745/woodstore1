@@ -1,0 +1,58 @@
+{% extends 'app/main.html' %}
+{% block content %}
+
+    <br>
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-sm">
+            <div class="card card-body">
+                <br><br><h5>Customer Name : {{customer.name}}</h5><br><br>
+            </div>
+        </div>
+    
+
+    <div class="col-sm">
+        <div class="card card-body">
+            <h5>Contact Information:</h5><hr>
+             <p class="lead">Phone:{{customer.phone}}</p>
+            <p class="lead"> E-mail:{{customer.email}}</p>
+        </div>
+    </div>
+
+    <div class="col-sm">
+        <div class="card card-body">
+            <h5>Total bill:</h5><hr>
+            <h1 style="text-align: center;padding: 10px">{{total_bill}}</h1>
+        </div>
+    </div>
+</div>
+<div class="container pt-3">
+    <table class="table table-bordered bg-white">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Date</th>
+                <th>Payment</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in order %}
+            <tr>
+                <td>{{i.product}}</td>
+                <td>{{i.product.price}}</td>
+                <td>{{i.date}}</td>
+                <td>{{i.payment}}</td>
+                <td><a href="{% url 'update' i.id %}" class="btn btn-outline-secondary btn-sm">Update</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+</div>
+
+
+{% endblock %}
