@@ -1,0 +1,16 @@
+{% extends 'app/main.html' %}
+{% block content %}
+
+<div class="container mt-5">
+  <h1 class="display-4">Add product:</h1>
+  <hr>
+      <form action="" method="post">
+          {%csrf_token%}
+          <table class="table">
+              {{form}}
+          </table>
+          <button class="btn btn-block btn-outline-primary w-100 " type="submit">Submit</button>
+      </form
+</div>
+
+{% endblock %}

@@ -56,3 +56,14 @@ def update(request,pk):
             return redirect('/')
     context={'form':form}
     return render(request,'app/bill.html',context)
+
+# customerform
+def customerform(request):
+    form=CustomerForm()
+    if request.method=='POST':
+        print(request.POST)
+        form=CustomerForm(request.POST)
+        if form.is_valid():
+            form.save()
+    context={'form':form}
+    return render(request,'app/add_customer.html',context)

@@ -16,3 +16,9 @@ class BillForm(ModelForm):
     class Meta:
         model=Bill
         fields='__all__'
+
+# customer form
+class CustomerForm(ModelForm):
+    class Meta:
+        model=Customer
+        fields='__all__'

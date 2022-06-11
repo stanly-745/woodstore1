@@ -25,4 +25,5 @@ urlpatterns = [
     path('add_prod/',views.productform,name='addpro'),
     path('bill/',views.billform,name='bill'),
     path('update/<str:pk>/',views.update,name='update'),
+    path('add_cus/',views.customerform,name='addcus'),
 ]
