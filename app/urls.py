@@ -25,5 +25,4 @@ urlpatterns = [
     path('add_prod/',views.productform,name='addpro'),
     path('bill/',views.billform,name='bill'),
     path('update/<str:pk>/',views.update,name='update'),
-    # path('billdetail/<str:pk>/',views.billdetail,name='billdetail')
 ]
