@@ -6,9 +6,8 @@ from django.views import generic
 # Create your views here.
 def home(request):
     count=product.objects.count()
-    not_paid=Bill.objects.filter(status='Not-Delivered').count()
     customer=Customer.objects.all()
-    Context={'count':count,'customer':customer,'not_paid':not_paid}
+    Context={'count':count,'customer':customer,}
     return render(request,'app/home.html',Context)
 
 def Product(request):
