@@ -5,10 +5,13 @@ from django.views import generic
 
 # Create your views here.
 def home(request):
+    no_order=Order.objects.count()
     count=product.objects.count()
-    not_paid=Bill.objects.filter(payment='Not-paid').count()
+    not_paid=Order.objects.filter(status='Not-Delivered').count()
+    stock=Stock.objects.filter(quantity=0).count()
     customer=Customer.objects.all()
-    Context={'count':count,'customer':customer,'not_paid':not_paid}
+    worker=Worker.objects.all()
+    Context={'count':count,'customer':customer,'not_paid':not_paid,'worker':worker,'no_order':no_order,'stock':stock}
     return render(request,'app/home.html',Context)
 
 def Product(request):
@@ -41,13 +44,13 @@ def billform(request):
 
 def customer(request,pk_test):
     customer=Customer.objects.get(id=pk_test)
-    orders=customer.bill_set.all()
+    orders=customer.order_set.all()
     total_bill=orders.count()
     context={'customer':customer,'order':orders,'total_bill':total_bill}
     return render(request,'app/customer.html',context)
 
 def update(request,pk):
-    bill=Bill.objects.get(id=pk)
+    bill=Order.objects.get(id=pk)
     form=BillForm(instance=bill)
     if request.method=='POST':
         form=BillForm(request.POST,instance=bill)
@@ -67,3 +70,52 @@ def customerform(request):
             form.save()
     context={'form':form}
     return render(request,'app/add_customer.html',context)
+
+# stock form
+def stockform(request):
+    form=StockForm()
+    if request.method=='POST':
+        print(request.POST)
+        form=StockForm(request.POST)
+        if form.is_valid():
+            form.save()
+    context={'form':form}
+    return render(request,'app/stock_form.html',context)
+
+# worker form
+def workerform(request):
+    form=WorkerForm()
+    if request.method=='POST':
+        print(request.POST)
+        form=WorkerForm(request.POST)
+        if form.is_valid():
+            form.save()
+    context={'form':form}
+    return render(request,'app/worker_form.html',context)
+
+def update_stock(request,pk):
+    stock=Stock.objects.get(id=pk)
+    form=StockForm(instance=stock)
+    if request.method=='POST':
+        form=StockForm(request.POST,instance=stock)
+        if form.is_valid():
+            form.save()
+            return redirect('stock')
+    context={'form':form}
+    return render(request,'app/stock_form.html',context)
+
+def worker(request,pk):
+    workers=Worker.objects.get(id=pk)
+    context={'worker':workers}
+    return render(request,'app/worker.html',context)
+
+def order(request):
+    orders=Order.objects.all()
+    context={'orders':orders}
+    return render(request,'app/order.html',context)
+
+def stock(request):
+    stock=Stock.objects.all()
+    stocks=Stock.objects.filter(quantity=0).all()
+    context={'stock':stock,'stocks':stocks}
+    return render(request,'app/stock.html',context)
