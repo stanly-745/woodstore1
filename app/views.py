@@ -40,7 +40,7 @@ def billform(request):
 
 def customer(request,pk_test):
     customer=Customer.objects.get(id=pk_test)
-    orders=customer.order_set.all()
+    orders=customer.bill_set.all()
     total_bill=orders.count()
     context={'customer':customer,'order':orders,'total_bill':total_bill}
     return render(request,'app/customer.html',context)
