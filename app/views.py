@@ -5,9 +5,9 @@ from django.views import generic
 
 # Create your views here.
 def home(request):
-    no_order=Order.objects.count()
+    no_order=Bill.objects.count()
     count=product.objects.count()
-    not_paid=Order.objects.filter(status='Not-Delivered').count()
+    not_paid=Bill.objects.filter(status='Not-Delivered').count()
     stock=Stock.objects.filter(quantity=0).count()
     customer=Customer.objects.all()
     worker=Worker.objects.all()
@@ -50,7 +50,7 @@ def customer(request,pk_test):
     return render(request,'app/customer.html',context)
 
 def update(request,pk):
-    bill=Order.objects.get(id=pk)
+    bill=Bill.objects.get(id=pk)
     form=BillForm(instance=bill)
     if request.method=='POST':
         form=BillForm(request.POST,instance=bill)
@@ -110,7 +110,7 @@ def worker(request,pk):
     return render(request,'app/worker.html',context)
 
 def order(request):
-    orders=Order.objects.all()
+    orders=Bill.objects.all()
     context={'orders':orders}
     return render(request,'app/order.html',context)
 

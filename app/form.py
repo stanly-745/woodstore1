@@ -14,7 +14,7 @@ class ProductForm(ModelForm):
 
 class BillForm(ModelForm):
     class Meta:
-        model=Order
+        model=Bill
         fields='__all__'
 
 # customer form

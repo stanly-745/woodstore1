@@ -19,7 +19,7 @@ class Customer(models.Model):
     def __str__(self):
         return self.name
 
-class Order(models.Model):
+class Bill(models.Model):
     status=(
         ('Delivered','Delivered'),
         ('Not-Delivered','not-Delivered'),
